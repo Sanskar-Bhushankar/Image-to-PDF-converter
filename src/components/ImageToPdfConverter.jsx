@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDropzone } from "react-dropzone";
 import jsPDF from "jspdf";
+import heic2any from "heic2any";
 import {
   DndContext,
   closestCenter,
@@ -77,18 +78,51 @@ const ImageToPdfConverter = () => {
     })
   );
 
-  // Handle image uploads
-  const onDrop = (acceptedFiles) => {
-    // Only accept image files
-    const imageFiles = acceptedFiles.filter(file => 
-      file.type.startsWith('image/')
-    );
-    // Add id property to each image for drag-and-drop functionality
-    const newImages = imageFiles.map((file, index) => ({
-      id: `${Date.now()}-${index}`,
-      file
-    }));
-    setImages((prevImages) => [...prevImages, ...newImages]);
+  // Handle image uploads with HEIC support
+  const onDrop = async (acceptedFiles) => {
+    try {
+      const processedFiles = await Promise.all(
+        acceptedFiles.map(async (file) => {
+          // Check if file is HEIC/HEIF format
+          if (file.type === "image/heic" || file.type === "image/heif") {
+            try {
+              // Convert HEIC to JPEG blob
+              const jpegBlob = await heic2any({
+                blob: file,
+                toType: "image/jpeg",
+                quality: 0.85
+              });
+              
+              // Create a new file from the JPEG blob
+              return new File([jpegBlob], file.name.replace(/\.(heic|heif)$/i, '.jpg'), {
+                type: "image/jpeg"
+              });
+            } catch (error) {
+              console.error("Error converting HEIC file:", error);
+              setError(`Error converting HEIC file: ${file.name}`);
+              return null;
+            }
+          }
+          return file;
+        })
+      );
+
+      // Filter out failed conversions and non-image files
+      const imageFiles = processedFiles.filter(file => 
+        file && file.type.startsWith('image/')
+      );
+
+      // Add id property to each image for drag-and-drop functionality
+      const newImages = imageFiles.map((file, index) => ({
+        id: `${Date.now()}-${index}`,
+        file
+      }));
+      
+      setImages((prevImages) => [...prevImages, ...newImages]);
+    } catch (error) {
+      console.error("Error processing files:", error);
+      setError("Error processing files. Please try again.");
+    }
   };
 
   // Handle image reordering
@@ -105,11 +139,11 @@ const ImageToPdfConverter = () => {
     }
   };
 
-  // Use react-dropzone for drag-and-drop file uploads
+  // Update the dropzone configuration to accept HEIC files
   const { getRootProps, getInputProps } = useDropzone({ 
     onDrop,
     accept: {
-      'image/*': ['.png', '.jpg', '.jpeg', '.gif']
+      'image/*': ['.png', '.jpg', '.jpeg', '.gif', '.heic', '.heif']
     }
   });
 
@@ -286,7 +320,7 @@ const ImageToPdfConverter = () => {
         <div className="dropzone-content">
           <i className="upload-icon">📁</i>
           <p>Drag & drop images here, or click to select files</p>
-          <span className="supported-formats">Supported formats: PNG, JPG, JPEG, GIF</span>
+          <span className="supported-formats">Supported formats: PNG, JPG, JPEG, GIF, HEIC, HEIF</span>
         </div>
       </div>
 

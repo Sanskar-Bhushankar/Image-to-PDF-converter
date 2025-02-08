@@ -16,7 +16,7 @@ Disclaimer - I made it for my personal use, to convert images to PDF files, and 
   - Canvas Mode: Images are fitted to A4 pages with margins
 - **Custom PDF Naming**: Name your output PDF file
 - **Responsive Design**: Works on desktop and mobile devices
-- **Format Support**: Accepts JPG, JPEG, PNG, and GIF files
+- **Format Support**: Accepts JPG, JPEG, PNG, GIF, and HEIC/HEIF files
 - **Image Optimization**: Automatic compression for optimal PDF file size
 
 ## 🚀 Live Demo
