@@ -1,0 +1,368 @@
+body {
+  background-color: #1a1a1a;
+  color: #e0e0e0;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.converter-container {
+  max-width: 800px;
+  width: 100%;
+  margin: 40px auto;
+  padding: 20px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+.dropzone {
+  border: 2px dashed #4a4a4a;
+  background-color: #2a2a2a;
+  border-radius: 8px;
+  padding: 30px;
+  text-align: center;
+  cursor: pointer;
+  margin: 20px 0;
+  transition: all 0.3s ease;
+}
+
+.dropzone:hover {
+  border-color: #4a9eff;
+  background-color: #303030;
+}
+
+.dropzone-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.upload-icon {
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+
+.supported-formats {
+  font-size: 0.9rem;
+  color: #888;
+  margin-top: 10px;
+}
+
+.preview-area {
+  margin-top: 20px;
+}
+
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 15px;
+  margin: 20px 0;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #2a2a2a;
+  border: 1px solid #3a3a3a;
+}
+
+.image-preview {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  aspect-ratio: 1;
+  transition: transform 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  background: #333;
+}
+
+.image-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #f0f0f0;
+}
+
+.drag-area {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  cursor: move;
+}
+
+.remove-btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: rgba(220, 53, 69, 0.8);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  z-index: 3;
+  transition: background-color 0.3s ease;
+  pointer-events: auto;
+}
+
+.remove-btn:hover {
+  background: rgba(220, 53, 69, 1);
+}
+
+.convert-btn {
+  background-color: #4a9eff;
+  border-radius: 6px;
+  font-weight: 600;
+  margin-top: 20px;
+  width: 100%;
+  max-width: 300px;
+  display: block;
+  padding: 12px 24px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.convert-btn:hover {
+  background-color: #3a8eef;
+}
+
+.convert-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.conversion-options {
+  background-color: #2a2a2a;
+  border: 1px solid #3a3a3a;
+  border-radius: 8px;
+  margin: 20px 0;
+  padding: 15px;
+}
+
+.mode-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.mode-toggle input[type="checkbox"] {
+  background: #444;
+  width: 40px;
+  height: 20px;
+  appearance: none;
+  border-radius: 10px;
+  position: relative;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.mode-toggle input[type="checkbox"]:checked {
+  background: #4a9eff;
+}
+
+.mode-toggle input[type="checkbox"]::before {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background: white;
+  border-radius: 50%;
+  top: 2px;
+  left: 2px;
+  transition: left 0.3s;
+}
+
+.mode-toggle input[type="checkbox"]:checked::before {
+  left: 22px;
+}
+
+.toggle-label {
+  font-weight: 500;
+}
+
+.mode-description {
+  margin-top: 8px;
+  font-size: 0.9em;
+  color: #666;
+}
+
+.pdf-name-input {
+  background-color: #2a2a2a;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #3a3a3a;
+  margin: 20px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pdf-name-input label {
+  font-weight: 500;
+}
+
+.pdf-name-input input {
+  background-color: #333;
+  border: 1px solid #444;
+  color: #e0e0e0;
+  padding: 10px 15px;
+  border-radius: 4px;
+  font-size: 14px;
+  flex: 1;
+  max-width: 300px;
+}
+
+.pdf-name-input input:focus {
+  border-color: #4a9eff;
+  outline: none;
+}
+
+.dragging {
+  opacity: 0.8 !important;
+  transform: scale(1.05) !important;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2) !important;
+  z-index: 1;
+}
+
+.image-preview:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+}
+
+.image-preview[data-dragging="true"] {
+  opacity: 0.5;
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.image-order {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+  z-index: 2;
+}
+
+.preview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.preview-header h3 {
+  color: #4a9eff;
+  font-size: 1.4rem;
+  margin: 0;
+}
+
+.clear-all-btn {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 500;
+}
+
+.clear-all-btn:hover {
+  background-color: #c82333;
+}
+
+.header-section {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.header-section h1 {
+  color: #4a9eff;
+  margin-bottom: 25px;
+  font-size: 2.8rem;
+  font-weight: 600;
+}
+
+.disclaimer {
+  background-color: #2a2a2a;
+  border: 1px solid #3a3a3a;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px 0;
+  color: #e0e0e0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.disclaimer strong {
+  color: #4a9eff;
+}
+
+.converter-footer {
+  margin-top: 60px;
+  padding-top: 20px;
+  border-top: 1px solid #3a3a3a;
+  text-align: center;
+  color: #888;
+}
+
+.github-link {
+  color: #4a9eff;
+  font-weight: 500;
+}
+
+.follow-button {
+  background-color: #2a2a2a;
+  border: 1px solid #4a9eff;
+  color: #4a9eff;
+  margin-top: 15px;
+  display: inline-block;
+  padding: 8px 16px;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+}
+
+.follow-button:hover {
+  background-color: #4a9eff;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .header-section h1 {
+    font-size: 2rem;
+  }
+  
+  .disclaimer {
+    font-size: 0.9rem;
+  }
+  
+  .converter-container {
+    margin: 20px auto;
+    padding: 15px;
+  }
+}
