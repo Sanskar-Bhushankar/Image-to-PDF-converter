@@ -4,15 +4,12 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
 }
 
 .converter-container {
   max-width: 800px;
   width: 100%;
-  margin: 40px auto;
+  margin: 20px auto;
   padding: 20px;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   box-sizing: border-box;
@@ -31,61 +28,68 @@ body {
   cursor: pointer;
   margin: 20px 0;
   transition: all 0.3s ease;
+  color: #aaa;
 }
 
 .dropzone:hover {
   border-color: #4a9eff;
   background-color: #303030;
+  color: #e0e0e0;
 }
 
 .dropzone-content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 15px;
+  gap: 10px;
 }
 
 .upload-icon {
-  font-size: 3rem;
-  margin-bottom: 10px;
+  font-size: 2.5rem;
+  margin-bottom: 5px;
 }
 
 .supported-formats {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   color: #888;
-  margin-top: 10px;
+  margin-top: 5px;
 }
 
 .preview-area {
-  margin-top: 20px;
+  margin-top: 30px;
+  padding: 20px;
+  background-color: #252525;
+  border-radius: 8px;
+  border: 1px solid #3a3a3a;
 }
 
 .image-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
   gap: 15px;
-  margin: 20px 0;
-  padding: 20px;
-  border-radius: 8px;
-  background-color: #2a2a2a;
-  border: 1px solid #3a3a3a;
+  margin-bottom: 20px;
 }
 
 .image-preview {
   position: relative;
-  border-radius: 8px;
+  border-radius: 6px;
   overflow: hidden;
   aspect-ratio: 1;
-  transition: transform 0.2s ease;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
   background: #333;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.image-preview:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
 }
 
 .image-preview img {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  background: #f0f0f0;
 }
 
 .drag-area {
@@ -97,173 +101,44 @@ body {
 
 .remove-btn {
   position: absolute;
-  top: 5px;
-  right: 5px;
-  background: rgba(220, 53, 69, 0.8);
+  top: 6px;
+  right: 6px;
+  background: rgba(220, 53, 69, 0.75);
   color: white;
   border: none;
   border-radius: 50%;
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 12px;
+  font-size: 11px;
+  font-weight: bold;
+  line-height: 1;
   z-index: 3;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.2s ease, transform 0.1s ease;
   pointer-events: auto;
 }
 
 .remove-btn:hover {
   background: rgba(220, 53, 69, 1);
-}
-
-.convert-btn {
-  background-color: #4a9eff;
-  border-radius: 6px;
-  font-weight: 600;
-  margin-top: 20px;
-  width: 100%;
-  max-width: 300px;
-  display: block;
-  padding: 12px 24px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: white;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.convert-btn:hover {
-  background-color: #3a8eef;
-}
-
-.convert-btn:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-
-.conversion-options {
-  background-color: #2a2a2a;
-  border: 1px solid #3a3a3a;
-  border-radius: 8px;
-  margin: 20px 0;
-  padding: 15px;
-}
-
-.mode-toggle {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  cursor: pointer;
-}
-
-.mode-toggle input[type="checkbox"] {
-  background: #444;
-  width: 40px;
-  height: 20px;
-  appearance: none;
-  border-radius: 10px;
-  position: relative;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.mode-toggle input[type="checkbox"]:checked {
-  background: #4a9eff;
-}
-
-.mode-toggle input[type="checkbox"]::before {
-  content: '';
-  position: absolute;
-  width: 16px;
-  height: 16px;
-  background: white;
-  border-radius: 50%;
-  top: 2px;
-  left: 2px;
-  transition: left 0.3s;
-}
-
-.mode-toggle input[type="checkbox"]:checked::before {
-  left: 22px;
-}
-
-.toggle-label {
-  font-weight: 500;
-}
-
-.mode-description {
-  margin-top: 8px;
-  font-size: 0.9em;
-  color: #666;
-}
-
-.pdf-name-input {
-  background-color: #2a2a2a;
-  padding: 20px;
-  border-radius: 8px;
-  border: 1px solid #3a3a3a;
-  margin: 20px 0;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.pdf-name-input label {
-  font-weight: 500;
-}
-
-.pdf-name-input input {
-  background-color: #333;
-  border: 1px solid #444;
-  color: #e0e0e0;
-  padding: 10px 15px;
-  border-radius: 4px;
-  font-size: 14px;
-  flex: 1;
-  max-width: 300px;
-}
-
-.pdf-name-input input:focus {
-  border-color: #4a9eff;
-  outline: none;
-}
-
-.dragging {
-  opacity: 0.8 !important;
-  transform: scale(1.05) !important;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2) !important;
-  z-index: 1;
-}
-
-.image-preview:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 3px 8px rgba(0,0,0,0.15);
-}
-
-.image-preview[data-dragging="true"] {
-  opacity: 0.5;
-  transform: scale(1.05);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-  z-index: 1;
+  transform: scale(1.1);
 }
 
 .image-order {
   position: absolute;
-  top: 5px;
-  left: 5px;
-  background: rgba(0, 0, 0, 0.7);
+  top: 6px;
+  left: 6px;
+  background: rgba(0, 0, 0, 0.65);
   color: white;
   border-radius: 50%;
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: bold;
   z-index: 2;
 }
@@ -273,11 +148,13 @@ body {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #3a3a3a;
 }
 
 .preview-header h3 {
-  color: #4a9eff;
-  font-size: 1.4rem;
+  color: #e0e0e0;
+  font-size: 1.2rem;
   margin: 0;
 }
 
@@ -287,55 +164,165 @@ body {
   border: none;
   padding: 8px 16px;
   border-radius: 6px;
+  font-size: 0.9em;
   font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
 .clear-all-btn:hover {
   background-color: #c82333;
 }
 
-.header-section {
-  text-align: center;
-  margin-bottom: 40px;
+.pdf-name-input {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-.header-section h1 {
-  color: #4a9eff;
-  margin-bottom: 25px;
-  font-size: 2.8rem;
-  font-weight: 600;
+.pdf-name-input label {
+  font-weight: 500;
+  color: #aaa;
+  font-size: 0.95em;
 }
 
-.disclaimer {
+.pdf-name-input input {
+  background-color: #333;
+  border: 1px solid #444;
+  color: #e0e0e0;
+  padding: 10px 15px;
+  border-radius: 4px;
+  font-size: 0.95em;
+  flex-grow: 1;
+  max-width: 400px;
+}
+
+.pdf-name-input input:focus {
+  border-color: #4a9eff;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(74, 158, 255, 0.2);
+}
+
+.conversion-options {
   background-color: #2a2a2a;
   border: 1px solid #3a3a3a;
   border-radius: 8px;
-  padding: 20px;
-  margin: 20px 0;
-  color: #e0e0e0;
-  font-size: 0.95rem;
-  line-height: 1.6;
+  margin-bottom: 25px;
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 15px;
 }
 
-.disclaimer strong {
-  color: #4a9eff;
+.mode-toggle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.mode-toggle input[type="checkbox"] {
+  appearance: none;
+  width: 44px;
+  height: 22px;
+  background-color: #444;
+  border-radius: 11px;
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  outline: none;
+}
+
+.mode-toggle input[type="checkbox"]::before {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  background-color: white;
+  border-radius: 50%;
+  top: 2px;
+  left: 2px;
+  transition: transform 0.3s ease;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+.mode-toggle input[type="checkbox"]:checked {
+  background-color: #4a9eff;
+}
+
+.mode-toggle input[type="checkbox"]:checked::before {
+  transform: translateX(22px);
+}
+
+.toggle-label {
+  font-weight: 500;
+  color: #e0e0e0;
+}
+
+.mode-description {
+  margin: 0;
+  font-size: 0.9em;
+  color: #888;
+  flex-grow: 1;
+  text-align: right;
+  min-width: 200px;
+}
+
+.convert-btn {
+  background-color: #4a9eff;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  padding: 12px 25px;
+  font-size: 1em;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+  display: block;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.convert-btn:hover {
+  background-color: #3a8eef;
+}
+
+.convert-btn:active {
+    transform: scale(0.98);
+}
+
+.convert-btn:disabled {
+  background-color: #555;
+  color: #999;
+  cursor: not-allowed;
 }
 
 .converter-footer {
-  margin-top: 60px;
+  margin-top: 40px;
   padding-top: 20px;
   border-top: 1px solid #3a3a3a;
   text-align: center;
   color: #888;
+  font-size: 0.9em;
 }
 
 .github-link {
   color: #4a9eff;
   font-weight: 500;
+  text-decoration: none;
+}
+.github-link:hover {
+    text-decoration: underline;
 }
 
 .follow-button {
-  background-color: #2a2a2a;
+  background-color: transparent;
   border: 1px solid #4a9eff;
   color: #4a9eff;
   margin-top: 15px;
@@ -344,7 +331,7 @@ body {
   text-decoration: none;
   border-radius: 6px;
   font-size: 0.9rem;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .follow-button:hover {
@@ -353,16 +340,53 @@ body {
 }
 
 @media (max-width: 768px) {
+  .converter-container {
+    margin: 15px auto;
+    padding: 15px;
+  }
   .header-section h1 {
     font-size: 2rem;
   }
-  
   .disclaimer {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+    padding: 10px;
   }
-  
-  .converter-container {
-    margin: 20px auto;
-    padding: 15px;
+  .image-grid {
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    gap: 10px;
   }
+  .conversion-options {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+  .mode-description {
+      text-align: left;
+      margin-top: 10px;
+  }
+  .pdf-name-input {
+      flex-direction: column;
+      align-items: stretch;
+  }
+  .pdf-name-input input {
+      max-width: none;
+  }
+  .convert-btn {
+      width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+    .header-section h1 {
+        font-size: 1.8rem;
+    }
+    .image-grid {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    }
+    .preview-header h3 {
+        font-size: 1.1rem;
+    }
+    .clear-all-btn {
+        padding: 6px 12px;
+        font-size: 0.85em;
+    }
 }

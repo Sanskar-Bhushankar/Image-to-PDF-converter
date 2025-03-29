@@ -1,42 +1,55 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* Keep nav styles */
+.main-nav {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 15px;
+  background-color: #333; /* Dark background for nav */
+  border-radius: 8px;
+  margin-bottom: 30px; /* Space below nav */
+  flex-shrink: 0; /* Prevent nav from shrinking */
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.main-nav a {
+  color: #e0e0e0;
+  text-decoration: none;
+  padding: 8px 15px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.main-nav a:hover,
+.main-nav a.active { /* You might need NavLink for active class styling */
+  background-color: #4a9eff;
+  color: #fff;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+/* Styles for the main App container - Simplified */
+.App {
+  /* Remove max-width and margin - #root handles centering */
+  /* max-width: 1100px; */
+  /* margin-left: auto; */
+  /* margin-right: auto; */
+
+  /* Keep padding if you want space *inside* the components, relative to the nav/footer */
+  padding: 0 1rem 2rem 1rem;
 }
 
-.card {
-  padding: 2em;
-}
+/* Ensure #root doesn't constrain width unnecessarily */
+/* It's often better to let body or html handle background and .App handle content structure */
+/* #root { */
+  /* max-width: 1280px; */ /* Remove this if present */
+  /* margin: 0 auto; */ /* Remove this if present */
+/* } */
 
-.read-the-docs {
-  color: #888;
-}
+/* If the above doesn't work, try this flexbox approach on .App */
+/* .App {
+  display: flex;
+  flex-direction: column;
+  align-items: center; // Center items horizontally
+  padding: 0 1rem 2rem 1rem;
+  min-height: calc(100vh - 80px); // Adjust based on nav height if footer needs pushing
+} */
+
+/* Remove other potentially conflicting styles like .logo, .card, etc. */
+/* unless they are still actively used in the new structure */

@@ -18,6 +18,7 @@ import {
   rectSortingStrategy,
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
+import './ImageToPdfConverter.css';
 
 // SortableImage component
 const SortableImage = ({ image, index, onRemove }) => {
