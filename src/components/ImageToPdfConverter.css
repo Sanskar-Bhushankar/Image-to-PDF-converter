@@ -97,6 +97,7 @@ body {
   height: 100%;
   position: relative;
   cursor: move;
+  touch-action: none;
 }
 
 .remove-btn {

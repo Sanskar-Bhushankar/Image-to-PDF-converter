@@ -7,6 +7,7 @@ import {
     closestCenter,
     KeyboardSensor,
     PointerSensor,
+    TouchSensor,
     useSensor,
     useSensors,
 } from '@dnd-kit/core';
@@ -80,9 +81,21 @@ const PdfEditor = () => {
     const [outputPdfName, setOutputPdfName] = useState("edited-pdf");
 
     const sensors = useSensors(
-        useSensor(PointerSensor),
+        useSensor(PointerSensor, {
+          // Require the pointer to move by 10 pixels before activating
+          activationConstraint: {
+            distance: 10,
+          },
+        }),
+        useSensor(TouchSensor, {
+          // Press delay of 250ms, with tolerance of 5px of movement
+          activationConstraint: {
+            delay: 250,
+            tolerance: 5,
+          },
+        }),
         useSensor(KeyboardSensor, {
-            coordinateGetter: sortableKeyboardCoordinates,
+          coordinateGetter: sortableKeyboardCoordinates,
         })
     );
 

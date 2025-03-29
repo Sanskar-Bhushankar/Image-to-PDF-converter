@@ -162,6 +162,7 @@
     background: #fff; /* White background for PDF pages */
     padding: 5px; /* Small padding around image */
     border-bottom: 1px solid #444; /* Separator */
+    touch-action: none; /* Prevent browser scrolling/panning on this element */
 }
 
 .page-preview img {
